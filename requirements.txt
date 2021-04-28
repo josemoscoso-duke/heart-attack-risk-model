@@ -1,0 +1,10 @@
+flask
+matplotlib
+numpy
+pandas
+scikit-learn
+seaborn
+pytest
+pylint
+black
+
