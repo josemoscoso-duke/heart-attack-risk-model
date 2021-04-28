@@ -6,7 +6,7 @@ echo "Port: $PORT"
 # POST method predict
 curl -d '{
     "age":{
-        "0":35
+        "0":"35"
     },
     "sex":{
         "0":"female"
@@ -15,10 +15,10 @@ curl -d '{
         "0":"non-anginal pain"
     },
     "trestbps":{
-        "0":145
+        "0":"145"
     },
     "chol":{
-        "0":200
+        "0":"200"
     },
     "fbs":{
         "0":"<120 mg/dl"
@@ -27,23 +27,23 @@ curl -d '{
         "0":"normal"
     },
     "thalach":{
-        "0": 160
+        "0":"160"
     },
     "exang":{
         "0":"yes"
     },
     "oldpeak":{
-        "0":1.0
+        "0":"1.0"
     },
     "slope":{
         "0":"flat"
     },
     "ca":{
-        "0":0
+        "0":"0"
     },
     "thal":{
         "0":"normal"
     }
-}\
+}'\
      -H "Content-Type: application/json" \
      -X POST http://localhost:$PORT/predict

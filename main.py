@@ -24,8 +24,6 @@ def make_prediction(model, data, scaler, transformer):
     x_new[:, numerical_cols] = scaler.transform(x_new[:, numerical_cols])
     x_new = transformer.transform(x_new)
     
-    print(x_new.head())
-    
     # Make prediction
     new_preds = model.predict(x_new)
     
@@ -36,17 +34,10 @@ def make_prediction(model, data, scaler, transformer):
 @app.route('/')
 def hello():
     """Return a friendly HTTP greeting."""
-    print("I am inside hello world")
-    return 'Hello World! CD'
+    print("This model will predict risk of heart attack")
+    return 'This model will predict risk of heart attack'
 
-@app.route('/echo/<name>')
-def echo(name):
-    print(f"This was placed in the url: new-{name}")
-    val = {"new-name": name}
-    return jsonify(val)
-
-@app.route('/predict', methods = ['GET','POST'])
-# Make prediction
+@app.route('/predict', methods = ['POST'])
 def predict():
     json_payload = request.json
     LOG.info(f"JSON payload: {json_payload}")
