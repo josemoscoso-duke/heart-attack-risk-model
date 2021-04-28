@@ -1,11 +1,16 @@
 from flask import Flask
 from flask import jsonify
 import logging
+import pickle
 
 
 logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
+# Load model, scaler, and column transformer
+m = pickle.load(open('model/model_lr.pkl'.'rb'))
+scaler = pickle.load(open('model/scaler.pkl'.'rb'))
+ct = pickle.load(open('model/column_transformer.pkl'.'rb'))
 
 @app.route('/')
 def hello():
@@ -19,6 +24,24 @@ def echo(name):
     val = {"new-name": name}
     return jsonify(val)
 
+@app.route('/predict', methods = ['POST'])
+# Make prediction
+def make_prediction(model, data, scaler, transformer):    
+    x_new = data.values
+    
+    # Set categorical and numerical columns
+    categorical_cols = [1, 2, 5, 6, 8, 10, 12]
+    numerical_cols = [0, 3, 4, 7, 9, 11]
+    
+    x_new[:, numerical_cols] = scaler.transform(x_new[:, numerical_cols])
+    x_new = transformer.transform(x_new)
+    
+    # Make prediction
+    new_preds = model.predict(x_new)
+    
+    new_preds = ['Not at Risk' if pred == 0 else 'At Risk' for pred in new_preds]
+    
+    return new_preds
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8080, debug=True)

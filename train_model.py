@@ -35,6 +35,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn import metrics
 
 # Split data
+# Split data
 def train_model(model, data):
     # Split data into x and y
     y = data.iloc[:, -1].values
@@ -65,6 +66,10 @@ def train_model(model, data):
 
     # Train model
     model.fit(x_train, y_train)
+    
+    # Save data objects
+    pickle.dump(sc_x, open('model/scaler.pkl', 'wb'))
+    pickle.dump(ct, open('model/column_transformer.pkl', 'wb'))
 
     # Evaluate on test data
     test_preds = model.predict(x_test)
