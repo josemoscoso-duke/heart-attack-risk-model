@@ -1,10 +1,21 @@
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify, Response, flash, request, redirect, render_template
+from werkzeug.utils import secure_filename
 from flask.logging import create_logger
 import pandas as pd
 import logging
 import pickle
+import urllib.request
+import os
+
+ALLOWED_EXTENSIONS = set(['csv'])
+
+def allowed_file(filename):
+    print(filename)
+    return '.' in filename and filename.rsplit('.', 1)[1].\
+                                        lower() in ALLOWED_EXTENSIONS
 
 app = Flask(__name__)
+app.secret_key = "secret key"
 
 LOG = create_logger(app)
 LOG.setLevel(logging.INFO)
@@ -23,9 +34,7 @@ def make_prediction(model, data, scaler, transformer):
     
     x_new[:, numerical_cols] = scaler.transform(x_new[:, numerical_cols])
     x_new = transformer.transform(x_new)
-    
-    print(x_new.head())
-    
+        
     # Make prediction
     new_preds = model.predict(x_new)
     
@@ -36,8 +45,40 @@ def make_prediction(model, data, scaler, transformer):
 @app.route('/')
 def hello():
     """Return a friendly HTTP greeting."""
-    print("I am inside hello world")
+    print("I am inside hello world")    
     return 'Hello World! CD'
+
+@app.route('/upload')
+def upload_form():
+    """upload_file"""
+    print("Upload a file")
+    return render_template('upload.html')
+
+@app.route('/upload', methods=['GET','POST'])
+def upload_file():
+    if (request.method == 'POST') or (request.method == 'GET') :
+        print('inside POST')        
+    # check if the post request has the file part
+        if 'file' not in request.files:
+            print('inside file not in request')
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            print('inside file empty')
+            flash('No file selected for uploading')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            print('Im here allowed file')
+            filename = secure_filename(file.filename)
+            flash('filename')
+            file.save(os.path.join('data', filename))
+            flash('File successfully uploaded')
+            return redirect('/')
+        else:
+            flash('Allowed file type is csv')
+            return redirect(request.url)
+
 
 @app.route('/echo/<name>')
 def echo(name):
@@ -48,9 +89,9 @@ def echo(name):
 @app.route('/predict', methods = ['GET','POST'])
 # Make prediction
 def predict():
-    json_payload = request.json
-    LOG.info(f"JSON payload: {json_payload}")
-    data = pd.DataFrame(json_payload)
+    #json_payload = request.json
+    #LOG.info(f"JSON payload: {json_payload}")
+    data = pd.read_csv(os.path.join('data', 'csv_test.csv'))
     LOG.info(f"inference payload DataFrame: {data}")
     prediction = make_prediction(model, data, scaler, transformer)
     return jsonify({'prediction': prediction})
