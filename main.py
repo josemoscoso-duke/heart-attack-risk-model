@@ -1,16 +1,18 @@
-from flask import Flask
-from flask import jsonify
+from flask import Flask, request, jsonify
+from flask.logging import create_logger
+import pandas as pd
 import logging
 import pickle
 
-
-logging.basicConfig(level=logging.INFO)
-
 app = Flask(__name__)
+
+LOG = create_logger(app)
+LOG.setLevel(logging.INFO)
+
 # Load model, scaler, and column transformer
-model = pickle.load(open('model/model_lr.pkl'.'rb'))
-scaler = pickle.load(open('model/scaler.pkl'.'rb'))
-transformer = pickle.load(open('model/column_transformer.pkl'.'rb'))
+model = pickle.load(open('model/model_lr.pkl','rb'))
+scaler = pickle.load(open('model/scaler.pkl','rb'))
+transformer = pickle.load(open('model/column_transformer.pkl','rb'))
 
 def make_prediction(model, data, scaler, transformer):    
     x_new = data.values
@@ -21,6 +23,8 @@ def make_prediction(model, data, scaler, transformer):
     
     x_new[:, numerical_cols] = scaler.transform(x_new[:, numerical_cols])
     x_new = transformer.transform(x_new)
+    
+    print(x_new.head())
     
     # Make prediction
     new_preds = model.predict(x_new)
@@ -41,13 +45,13 @@ def echo(name):
     val = {"new-name": name}
     return jsonify(val)
 
-@app.route('/predict', methods = ['POST'])
+@app.route('/predict', methods = ['GET','POST'])
 # Make prediction
 def predict():
     json_payload = request.json
     LOG.info(f"JSON payload: {json_payload}")
     data = pd.DataFrame(json_payload)
-    LOG.info(f"inference payload DataFrame: {inference_payload}")
+    LOG.info(f"inference payload DataFrame: {data}")
     prediction = make_prediction(model, data, scaler, transformer)
     return jsonify({'prediction': prediction})
 
