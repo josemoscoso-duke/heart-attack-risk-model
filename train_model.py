@@ -19,13 +19,13 @@ heart = pd.read_csv('data/heart_cleveland_upload.csv')
 
 # Rename columns based on data dictionary
 heart_new = heart.copy()
-heart_new['sex'] = heart_new['sex'].replace([0,1],['female','male'])
-heart_new['exang'] = heart_new['exang'].replace([0,1],['no','yes'])
+heart_new['sex'] = heart_new['sex'].replace([0,1],['Female','Male'])
+heart_new['exang'] = heart_new['exang'].replace([0,1],['No','Yes'])
 heart_new['fbs'] = heart_new['fbs'].replace([0,1],['<120 mg/dl','>120 mg/dl'])
-heart_new['restecg'] = heart_new['restecg'].replace([0,1,2],['normal','ST-T wave abnormality','left ventricular hypertrophy'])
-heart_new['cp'] = heart_new['cp'].replace([0,1,2,3],['typical angina','atypical angina','non-anginal pain','asymptomatic'])
-heart_new['slope'] = heart_new['slope'].replace([0,1,2],['upsloping', 'flat', 'downsploping'])
-heart_new['thal'] = heart_new['thal'].replace([0,1,2],['normal','fixed defect','reversable defect'])
+heart_new['restecg'] = heart_new['restecg'].replace([0,1,2],['Normal','ST-T wave abnormality','Left ventricular hypertrophy'])
+heart_new['cp'] = heart_new['cp'].replace([0,1,2,3],['Typical angina','Atypical angina','Non-anginal pain','Asymptomatic'])
+heart_new['slope'] = heart_new['slope'].replace([0,1,2],['Upsloping', 'Flat', 'Downsloping'])
+heart_new['thal'] = heart_new['thal'].replace([0,1,2],['Normal','Fixed defect','Reversable defect'])
 
 # Import libraries
 from sklearn.model_selection import train_test_split
@@ -34,7 +34,6 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn import metrics
 
-# Split data
 # Split data
 def train_model(model, data):
     # Split data into x and y

@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 PORT=8080
 echo "Port: $PORT"
+
 # POST method predict
 curl -d '{
     "age":{
         "0":49
     },
     "sex":{
-        "0":"male"
+        "0":"Male"
     },
     "cp":{
-        "0":"non-anginal pain"
+        "0":"Non-anginal pain"
     },
     "trestbps":{
         "0":118
@@ -22,25 +23,25 @@ curl -d '{
         "0":"<120 mg/dl"
     },
     "restecg":{
-        "0":"left ventricular hypertrophy"
+        "0":"Left ventricular hypertrophy"
     },
     "thalach":{
         "0": 126
     },
     "exang":{
-        "0":"no"
+        "0":"No"
     },
     "oldpeak":{
         "0":0.8
     },
     "slope":{
-        "0":"upsloping"
+        "0":"Upsloping"
     },
     "ca":{
         "0":3
     },
     "thal":{
-        "0":"normal"
+        "0":"Normal"
     }
 }'\
      -H "Content-Type: application/json" \
