@@ -84,7 +84,7 @@ gcloud config set project `PROJECT_ID_OR_NUMBER`
 
 Step 2: Make sure to follow this [guideline](https://cloud.google.com/source-repositories/docs/quickstart-triggering-builds-with-source-repositories) to automate App Engine deployments with Cloud Build
 
-![Enable this cloud build settings](image/cloud_build.png)
+<img src="image/cloud_build.png" width="450" height="400">
 
 Step 3: Create and deploy the app in GCP
 
@@ -95,7 +95,8 @@ gcloud app deploy
 
 Step 4: Once our model is deployed on GCP we get the application [end point](https://cloud-final-project-311921.uc.r.appspot.com).
 
-![EndPoint](image/gcp_app_deploy.png)
+
+<img src="image/gcp_app_deploy.png" width="400" height="200">
 
 
 ## FrontEnd
@@ -104,4 +105,5 @@ Our application front end code is stored in this linked [repository](https://git
 
 This web app allows you to test different sets of parameters and returns a prediction about the risk of having a heart attack.
 
-![FrontEnd](image/front_end.png)
+
+<img src="image/front_end_high.png" width="400" height="600">
