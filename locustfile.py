@@ -1,8 +1,16 @@
 import time
 from locust import HttpUser, task, between
 
+import resource
+print(resource.getrlimit(resource.RLIMIT_NOFILE))
+
+resource.setrlimit(resource.RLIMIT_NOFILE, (10000, 1048576))
+
+print(resource.getrlimit(resource.RLIMIT_NOFILE))
+
+
 class QuickstartUser(HttpUser):
-    #wait_time = between(1, 2.5)
+    wait_time = between(1, 2.5)
 
     @task
     def submitForm(self):
