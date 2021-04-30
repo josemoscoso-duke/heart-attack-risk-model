@@ -3,22 +3,12 @@
 <p align="center">
   <a href="#about">About</a> •
   <a href="#installation">Installation</a> •
-  <a href="#modelling">Modeling</a> •
-  <a href="#features">Features</a> •
-  <a href="#binds">Binds</a> •
-  <a href="#license">License</a>
+  <a href="#deployment">Deployment</a> •
 </p>
 
 ## About
 
-<table>
-<tr>
-<td>
 In this project we implemented a machine learning pipeline that trains a model and provides predictions about the risk of having a heart attack. Then, we deployed our model using [Streamlit](https://streamlit.io/). The application's end point is running on Google App Engine and can be accessed through a public [url](https://share.streamlit.io/rnhondova/heart-failure-prediction-app-ui/main/heart_failure_application_ui.py). We also show how our applications performance scale-up when it receives 1K+ requests via a load test with Locust framework.
-
-</td>
-</tr>
-</table>
 
 ## Description of required files
 
@@ -76,8 +66,28 @@ Port: 8080
 }
 ```
 
-## Deploy the app on GCP
+## Deployment
 
 After setting up a new project on GCP  
 
-Step 1: Ensure the current cloud 
+Step 1: Ensure the current GCP cloud shell is pointing to the appropriate project.
+
+```bash
+gcloud projects describe `PROJECT_ID_OR_NUMBER`
+```
+In case it is not, set it with:
+
+```bash
+gcloud config set project `PROJECT_ID_OR_NUMBER`
+```
+
+Step 2: Make sure to follow this [guideline](https://cloud.google.com/source-repositories/docs/quickstart-triggering-builds-with-source-repositories) to automate App Engine deployments with Cloud Build
+
+![Enable this cloud build settings](image/cloud_build.png)
+
+Step 3: Create and deploy the app in GCP
+
+```bash
+gcloud app create
+gcloud app deploy
+```
