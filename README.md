@@ -98,10 +98,10 @@ Step 4: Once our model is deployed on GCP we get the application [end point](htt
 ![EndPoint](image/gcp_app_deploy.png)
 
 
-## Front End
+## FrontEnd
 
 Our application front end code is stored in this linked [repository](https://github.com/Rnhondova/heart-failure-prediction-app-ui)
 
-This web app allows you to test different sets of parameters and returns a prediction about the risk of having a heart attack. 
+This web app allows you to test different sets of parameters and returns a prediction about the risk of having a heart attack.
 
 ![FrontEnd](image/front_end.png)
