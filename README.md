@@ -4,6 +4,7 @@
   <a href="#about">About</a> •
   <a href="#installation">Installation</a> •
   <a href="#deployment">Deployment</a> •
+  <a href="#front end">FrontEnd</a>
 </p>
 
 ## About
@@ -91,3 +92,16 @@ Step 3: Create and deploy the app in GCP
 gcloud app create
 gcloud app deploy
 ```
+
+Step 4: Once our model is deployed on GCP we get the application [end point](https://cloud-final-project-311921.uc.r.appspot.com).
+
+![EndPoint](image/gcp_app_deploy.png)
+
+
+## Front End
+
+Our application front end code is stored in this linked [repository](https://github.com/Rnhondova/heart-failure-prediction-app-ui)
+
+This web app allows you to test different sets of parameters and returns a prediction about the risk of having a heart attack. 
+
+![FrontEnd](image/front_end.png)
