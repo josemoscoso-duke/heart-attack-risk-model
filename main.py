@@ -21,7 +21,7 @@ def make_prediction(model, data, scaler, transformer):
     x_new = data.values
     
     # Set categorical and numerical columns
-    categorical_cols = [1, 2, 5, 6, 8, 10, 12]
+    # categorical_cols = [1, 2, 5, 6, 8, 10, 12]
     numerical_cols = [0, 3, 4, 7, 9, 11]
     
     x_new[:, numerical_cols] = scaler.transform(x_new[:, numerical_cols])
