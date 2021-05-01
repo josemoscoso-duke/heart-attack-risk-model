@@ -104,7 +104,7 @@ $gcloud app deploy
 
 ![app_deploy](image/gcp_app_deploy.png)
 
-## FrontEnd
+## Front_End
 
 Our application front end code is stored in this linked [repository](https://github.com/Rnhondova/heart-failure-prediction-app-ui)
 
@@ -112,7 +112,7 @@ This web app allows us to test different sets of parameters and returns a predic
 
 ![front_end](image/front_end_high.png)
 
-## Load Testing
+## Load_Testing
 
 Load testing was done using the Locust.io framework, which can be found [here](https://locust.io/). This framework will stress test the endpoint by spawning users and submitting many simultaneous requests. To use Locust for this project, follow the steps below:
 
