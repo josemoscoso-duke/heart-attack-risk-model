@@ -6,7 +6,7 @@
   <a href="#installation">Installation</a> •
   <a href="#deployment">Deployment</a> •
   <a href="#front_end">Front_End</a> •
-  <a href="#load_testing">Load_Testing</a>
+  <a href="#load_testing">Load Testing</a>
 </p>
 
 ## About
