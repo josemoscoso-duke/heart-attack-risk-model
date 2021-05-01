@@ -2,10 +2,11 @@ import time
 from locust import HttpUser, task, between
 
 import resource
+
+# check resources rlimit(maximum number of file descriptors that a process may hold open)
+# and increase it to a minimum of 10000
 print(resource.getrlimit(resource.RLIMIT_NOFILE))
-
 resource.setrlimit(resource.RLIMIT_NOFILE, (10000, 1048576))
-
 print(resource.getrlimit(resource.RLIMIT_NOFILE))
 
 

@@ -1,11 +1,10 @@
-from flask import Flask, jsonify, Response, flash, request, redirect, render_template
-from werkzeug.utils import secure_filename
+from flask import Flask, jsonify, request
 from flask.logging import create_logger
-import pandas as pd
 import logging
+import pandas as pd
 import pickle
-import urllib.request
-import os
+import warnings
+warnings.simplefilter("ignore", UserWarning)
 
 app = Flask(__name__)
 
@@ -20,8 +19,7 @@ transformer = pickle.load(open('model/column_transformer.pkl','rb'))
 def make_prediction(model, data, scaler, transformer):
     x_new = data.values
 
-    # Set categorical and numerical columns
-    # categorical_cols = [1, 2, 5, 6, 8, 10, 12]
+    # Set numerical columns
     numerical_cols = [0, 3, 4, 7, 9, 11]
 
     x_new[:, numerical_cols] = scaler.transform(x_new[:, numerical_cols])
