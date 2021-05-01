@@ -17,28 +17,28 @@ model = pickle.load(open('model/model_lr.pkl','rb'))
 scaler = pickle.load(open('model/scaler.pkl','rb'))
 transformer = pickle.load(open('model/column_transformer.pkl','rb'))
 
-def make_prediction(model, data, scaler, transformer):    
+def make_prediction(model, data, scaler, transformer):
     x_new = data.values
-    
+
     # Set categorical and numerical columns
     # categorical_cols = [1, 2, 5, 6, 8, 10, 12]
     numerical_cols = [0, 3, 4, 7, 9, 11]
-    
+
     x_new[:, numerical_cols] = scaler.transform(x_new[:, numerical_cols])
     x_new = transformer.transform(x_new)
-    
+
     # Make prediction
     new_preds = model.predict(x_new)
-    
+
     new_preds = ['Not at Risk' if pred == 0 else 'At Risk' for pred in new_preds]
-    
+
     return new_preds
 
 @app.route('/')
 def hello():
     """Return a friendly HTTP greeting."""
-    print("I am inside hello world")    
-    return 'Hello World! CD'
+    print("I am inside hello world")
+    return 'Welcome to our Web App on Predicting Risk of a heart attack'
 
 
 @app.route('/predict', methods = ['POST'])
