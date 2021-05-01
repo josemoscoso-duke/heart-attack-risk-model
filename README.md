@@ -5,7 +5,8 @@
   <a href="#model">Model</a> •
   <a href="#installation">Installation</a> •
   <a href="#deployment">Deployment</a> •
-  <a href="#front end">FrontEnd</a>
+  <a href="#front end">FrontEnd</a> •
+  <a href="#load testing">Load Testing</a>
 </p>
 
 ## About
@@ -27,40 +28,40 @@ Several models were trained on patient data used to evaluate the risk of a heart
 
 ## Installation
 
-Step 1: Clone this repository in enter the heart-attack-risk-model directory
+**Step 1: Clone this repository in enter the heart-attack-risk-model directory**
 
 ```bash
 $git clone https://github.com/josemoscoso-duke/heart-attack-risk-model
 $cd heart-attack-risk-model
 ```
 
-Step 2:Create virtual environment
+**Step 2:Create virtual environment**
 
 ```bash
 $virtualenv --python $(which python3) ~/.venv
 $source ~/.venv/bin/activate
 ```
 
-Step 3: Use the Makefile to install required files
+**Step 3: Use the Makefile to install required files**
 
 ```bash
 $make install
 ```
 
-Step 4: Retrain the model, in case you uploaded a new dataset in the data folder:
+**Step 4: Retrain the model, in case you uploaded a new dataset in the data folder:**
 ```data/heart_cleveland_upload.csv```
 
 ```bash
 $python train_model.py -- (optional)
 ```
 
-Step 5: Run the following command to build a local instance of the web app
+**Step 5: Run the following command to build a local instance of the web app**
 
 ```bash
 $python main.py
 ```
 
-Step 6: Test the web app with the following bash command
+**Step 6: Test the web app with the following bash command**
 
 ```bash
 $bash ./make_predictions.sh
@@ -77,7 +78,7 @@ Port: 8080
 
 After setting up a new project on GCP  
 
-Step 1: Ensure the current GCP cloud shell is pointing to the appropriate project.
+**Step 1: Ensure the current GCP cloud shell is pointing to the appropriate project.**
 
 ```bash
 gcloud projects describe `PROJECT_ID_OR_NUMBER`
@@ -88,22 +89,20 @@ In case it is not, set it with:
 gcloud config set project `PROJECT_ID_OR_NUMBER`
 ```
 
-Step 2: Make sure to follow this [guideline](https://cloud.google.com/source-repositories/docs/quickstart-triggering-builds-with-source-repositories) to automate App Engine deployments with Cloud Build
+**Step 2: Make sure to follow this [guideline](https://cloud.google.com/source-repositories/docs/quickstart-triggering-builds-with-source-repositories) to automate App Engine deployments with Cloud Build**
 
-<img src="image/cloud_build.png" width="450" height="400">
+![cloud_build](image/cloud_build.png)
 
-Step 3: Create and deploy the app in GCP
+**Step 3: Create and deploy the app in GCP**
 
 ```bash
 gcloud app create
 gcloud app deploy
 ```
 
-Step 4: Once our model is deployed on GCP we get the application [end point](https://cloud-final-project-311921.uc.r.appspot.com).
+**Step 4: Once our model is deployed on GCP we get the application [end point](https://cloud-final-project-311921.uc.r.appspot.com).**
 
-
-<img src="image/gcp_app_deploy.png" width="400" height="200">
-
+![app_deploy](image/gcp_app_deploy.png)
 
 ## FrontEnd
 
@@ -111,5 +110,18 @@ Our application front end code is stored in this linked [repository](https://git
 
 This web app allows you to test different sets of parameters and returns a prediction about the risk of having a heart attack.
 
+![front_end](image/front_end_high.png)
 
-<img src="image/front_end_high.png" width="400" height="600">
+## Load Testing
+
+Load testing was done using the Locust.io framework, which can be found [here](https://locust.io/). This framework will stress test the endpoint by spawning users and submitting many simultaneous requests. To use Locust for this project, follow the steps below:
+
+**Step 1: In the command shell, run `locust` to initialize load testing locally. 
+
+**Step 2: Fill out the form to set parameters for testing. An example is shown below**
+
+Results from our load testing are shown below. 
+
+![test_1](image/load_test_1.png)
+
+![test_2](image/load_test_2.png)
