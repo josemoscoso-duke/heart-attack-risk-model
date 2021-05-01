@@ -1,7 +1,8 @@
-<h4 align="center">Deploying a Machine Learning Model Using Streamlit and GCP.</h4>
+<h1 align="center">Deploying a Machine Learning Model Using Streamlit and GCP.</h1>
 
 <p align="center">
   <a href="#about">About</a> •
+  <a href="#model">Model</a> •
   <a href="#installation">Installation</a> •
   <a href="#deployment">Deployment</a> •
   <a href="#front end">FrontEnd</a>
@@ -9,15 +10,20 @@
 
 ## About
 
-In this project we implemented a machine learning pipeline that trains a model and provides predictions about the risk of having a heart attack. Then, we deployed our model using [Streamlit](https://streamlit.io/). The application's end point is running on Google App Engine and can be accessed through a public [url](https://share.streamlit.io/rnhondova/heart-failure-prediction-app-ui/main/heart_failure_application_ui.py). We also show how our applications performance scale-up when it receives 1K+ requests via a load test with Locust framework.
+In this project, we implemented a machine learning pipeline that trains a model and provides predictions about the risk of having a heart attack. Then, we deployed our model using [Streamlit](https://streamlit.io/). The application's end point is running on Google App Engine and can be accessed through a public [url](https://share.streamlit.io/rnhondova/heart-failure-prediction-app-ui/main/heart_failure_application_ui.py). We also show how our applications performance scale-up when it receives 1K+ requests via a load test with Locust framework.
 
 ## Description of required files
 
+> train_model.py : Primary code to train the logistic regression model
 > main.py : The main python file with the application code.   
 > requirements.txt : List of packages needs to be installed during app deployment.   
 > app.yaml : Contains environment configuration, specifying the run time configuration  
 > Makefile : File containing shell commands to execute requirements.txt, linting, testing and code formatting.     
 > cloudbuild.yaml : command for continuous integration in gcp, triggered by git pushes.
+
+## Model
+Several models were trained on patient data used to evaluate the risk of a heart attack. The data can be found [here](https://www.kaggle.com/cherngs/heart-disease-cleveland-uci). The best performing model was logistic regression, which had precision, accuracy, and recall above 90% when evaluated on test data. Refer to the `train_model.py` function for the final code used to train the model. 
+
 
 ## Installation
 
