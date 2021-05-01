@@ -5,8 +5,8 @@
   <a href="#model">Model</a> •
   <a href="#installation">Installation</a> •
   <a href="#deployment">Deployment</a> •
-  <a href="#front end">FrontEnd</a> •
-  <a href="#load testing">Load Testing</a>
+  <a href="#front_end">Front_End</a> •
+  <a href="#load_testing">Load_Testing</a>
 </p>
 
 ## About
@@ -23,7 +23,7 @@ In this project, we implemented a machine learning pipeline that trains a model 
 > cloudbuild.yaml : command for continuous integration in gcp, triggered by git pushes.
 
 ## Model
-Several models were trained on patient data used to evaluate the risk of a heart attack. The data can be found [here](https://www.kaggle.com/cherngs/heart-disease-cleveland-uci). The best performing model was logistic regression, which had precision, accuracy, and recall above 90% when evaluated on test data. Refer to the `train_model.py` function for the final code used to train the model. 
+Several models were trained on patient data used to evaluate the risk of a heart attack. The data can be found [here](https://www.kaggle.com/cherngs/heart-disease-cleveland-uci). The best performing model was logistic regression, which had precision, accuracy, and recall above 90% when evaluated on test data. Refer to the `train_model.py` function for the final code used to train the model.
 
 
 ## Installation
@@ -81,12 +81,12 @@ After setting up a new project on GCP
 **Step 1: Ensure the current GCP cloud shell is pointing to the appropriate project.**
 
 ```bash
-gcloud projects describe `PROJECT_ID_OR_NUMBER`
+$gcloud projects describe `PROJECT_ID_OR_NUMBER`
 ```
 In case it is not, set it with:
 
 ```bash
-gcloud config set project `PROJECT_ID_OR_NUMBER`
+$gcloud config set project `PROJECT_ID_OR_NUMBER`
 ```
 
 **Step 2: Make sure to follow this [guideline](https://cloud.google.com/source-repositories/docs/quickstart-triggering-builds-with-source-repositories) to automate App Engine deployments with Cloud Build**
@@ -96,8 +96,8 @@ gcloud config set project `PROJECT_ID_OR_NUMBER`
 **Step 3: Create and deploy the app in GCP**
 
 ```bash
-gcloud app create
-gcloud app deploy
+$gcloud app create
+$gcloud app deploy
 ```
 
 **Step 4: Once our model is deployed on GCP we get the application [end point](https://cloud-final-project-311921.uc.r.appspot.com).**
@@ -108,7 +108,7 @@ gcloud app deploy
 
 Our application front end code is stored in this linked [repository](https://github.com/Rnhondova/heart-failure-prediction-app-ui)
 
-This web app allows you to test different sets of parameters and returns a prediction about the risk of having a heart attack.
+This web app allows us to test different sets of parameters and returns a prediction about the risk of having a heart attack.
 
 ![front_end](image/front_end_high.png)
 
@@ -116,11 +116,11 @@ This web app allows you to test different sets of parameters and returns a predi
 
 Load testing was done using the Locust.io framework, which can be found [here](https://locust.io/). This framework will stress test the endpoint by spawning users and submitting many simultaneous requests. To use Locust for this project, follow the steps below:
 
-**Step 1: In the command shell, run `locust` to initialize load testing locally. 
+**Step 1: In the command shell, run `locust` to initialize load testing locally.
 
 **Step 2: Fill out the form to set parameters for testing. An example is shown below**
 
-Results from our load testing are shown below. 
+Results from our load testing are shown below.
 
 ![test_1](image/load_test_1.png)
 
