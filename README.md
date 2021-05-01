@@ -110,13 +110,15 @@ Our application front end code is stored in this linked [repository](https://git
 
 This web app allows us to test different sets of parameters and returns a prediction about the risk of having a heart attack.
 
-![front_end](image/front_end_high.png)
+![front_end_top](image/front_end_top.PNG)
+
+![front_end_bottom](image/front_end_2.PNG)
 
 ## Load_Testing
 
 Load testing was done using the Locust.io framework, which can be found [here](https://locust.io/). This framework will stress test the endpoint by spawning users and submitting many simultaneous requests. To use Locust for this project, follow the steps below:
 
-**Step 1: In the command shell, run `locust` to initialize load testing locally.
+**Step 1: In the command shell, run `locust` to initialize load testing locally.**
 
 **Step 2: Fill out the form to set parameters for testing. An example is shown below**
 
